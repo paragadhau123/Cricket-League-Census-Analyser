@@ -53,17 +53,12 @@ public class IPLAnalyserTest extends TestCase {
         }
     }
 
-    @Test
-    public void giveIPLMostRunsCSVFile_ShouldReturn_PlayerWith_TopStrikeRate() {
-        try {
-            IPLAnalyser iplAnalyser = new IPLAnalyser(IPLAnalyser.PlayerType.BATSMAN);
-            iplAnalyser.loadIPLData(IPLAnalyser.PlayerType.BATSMAN, MOST_RUNS_CSV_FILE_PATH);
-            IPLMostRunsCSV bestBattingAveragePlayer = iplAnalyser.getTopStrikeRatePlayer();
-            Assert.assertThat(bestBattingAveragePlayer.player, CoreMatchers.is("Ishant Sharma"));
-        } catch (IPLAnalyserException e) {
-            System.out.println("Fail");
-            e.printStackTrace();
-        }
+    public void giveIPLMostRunsCSVFile_ShouldReturn_PlayerWith_TopStrikeRate() throws IPLAnalyserException {
+        IPLAnalyser iplAnalyser = new IPLAnalyser();
+        iplAnalyser.loadIPLData(IPLAnalyser.PlayerType.BATSMAN, MOST_RUNS_CSV_FILE_PATH);
+        String player = iplAnalyser.getSortedData(SortField.STRIKE_RATE);
+        IPLAnalyserDAO[] iplCSV = new Gson().fromJson(player, IPLAnalyserDAO[].class);
+        Assert.assertEquals("Ishant Sharma", iplCSV[0].playerName);
     }
 
     @Test
