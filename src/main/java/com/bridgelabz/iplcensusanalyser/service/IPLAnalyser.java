@@ -30,6 +30,7 @@ public class IPLAnalyser {
         this.sortMap.put(SortField.STRIKE_RATE, Comparator.comparing(ipl -> ipl.strikeRate));
         this.sortMap.put(SortField.SIXES_AND_FOURS, Comparator.comparing(ipl -> ipl.sixes + ipl.fours));
         this.sortMap.put(SortField.MAXIMUM_RUNS, Comparator.comparing(ipl -> ipl.runs));
+        this.sortMap.put(SortField.BEST_BOWLING_AVERAGE, Comparator.comparing(ipl -> ipl.average));
         Comparator<IPLAnalyserDAO> foursAndSixesComparator = Comparator.comparing(ipl -> ipl.sixes + ipl.fours);
         Comparator<IPLAnalyserDAO> averageComparator = Comparator.comparing(ipl -> ipl.average);
         Comparator<IPLAnalyserDAO> maxRunsComparator = Comparator.comparing(ipl -> ipl.runs);
