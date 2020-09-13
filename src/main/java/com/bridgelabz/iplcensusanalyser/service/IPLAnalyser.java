@@ -12,6 +12,8 @@ import java.util.Comparator;
 import java.util.Map;
 
 public class IPLAnalyser {
+    enum PlayerType {BATSMAN, BOWLER}
+
     public static PlayerType playerType = null;
     Map<String, IPLAnalyserDAO> iplAnalyserMap = null;
 
@@ -23,9 +25,10 @@ public class IPLAnalyser {
         iplAnalyserMap = IPLAdapterFactory.getIPLDataObject(playerType, csvFilePath);
         return iplAnalyserMap.size();
     }
+
     public IPLMostRunsCSV getTopBattingAveragePlayer() throws IPLAnalyserException {
-        if (iplAnalyserMap == null || iplAnalyserMap.size() == 0){
-            throw new IPLAnalyserException(IPLAnalyserException.ExceptionType.NO_DATA,"No Data");
+        if (iplAnalyserMap == null || iplAnalyserMap.size() == 0) {
+            throw new IPLAnalyserException(IPLAnalyserException.ExceptionType.NO_DATA, "No Data");
         }
         Comparator<IPLAnalyserDAO> iplComparator = Comparator.comparing(iplData -> iplData.average);
         ArrayList iplDTO = IPLUtility.sort(iplComparator, iplAnalyserMap, true);
@@ -33,9 +36,10 @@ public class IPLAnalyser {
         IPLMostRunsCSV[] iplMostRunsCSV = new Gson().fromJson(sortedData, IPLMostRunsCSV[].class);
         return iplMostRunsCSV[0];
     }
+
     public IPLMostRunsCSV getMaximumFourHitter() throws IPLAnalyserException {
-        if (iplAnalyserMap == null || iplAnalyserMap.size() == 0){
-            throw new IPLAnalyserException(IPLAnalyserException.ExceptionType.NO_DATA,"No Data");
+        if (iplAnalyserMap == null || iplAnalyserMap.size() == 0) {
+            throw new IPLAnalyserException(IPLAnalyserException.ExceptionType.NO_DATA, "No Data");
         }
         Comparator<IPLAnalyserDAO> iplComparator = Comparator.comparing(iplData -> iplData.fours);
         ArrayList iplDTO = IPLUtility.sort(iplComparator, iplAnalyserMap, true);
@@ -43,9 +47,10 @@ public class IPLAnalyser {
         IPLMostRunsCSV[] iplMostFoursCSV = new Gson().fromJson(sortedData, IPLMostRunsCSV[].class);
         return iplMostFoursCSV[0];
     }
+
     public IPLMostRunsCSV getMaximumSixHitter() throws IPLAnalyserException {
-        if (iplAnalyserMap == null || iplAnalyserMap.size() == 0){
-            throw new IPLAnalyserException(IPLAnalyserException.ExceptionType.NO_DATA,"No Data");
+        if (iplAnalyserMap == null || iplAnalyserMap.size() == 0) {
+            throw new IPLAnalyserException(IPLAnalyserException.ExceptionType.NO_DATA, "No Data");
         }
         Comparator<IPLAnalyserDAO> iplComparator = Comparator.comparing(iplData -> iplData.sixes);
         ArrayList iplDTO = IPLUtility.sort(iplComparator, iplAnalyserMap, true);
@@ -53,9 +58,10 @@ public class IPLAnalyser {
         IPLMostRunsCSV[] iplMostFoursCSV = new Gson().fromJson(sortedData, IPLMostRunsCSV[].class);
         return iplMostFoursCSV[0];
     }
+
     public IPLMostRunsCSV getTopStrikeRatePlayer() throws IPLAnalyserException {
-        if (iplAnalyserMap == null || iplAnalyserMap.size() == 0){
-            throw new IPLAnalyserException(IPLAnalyserException.ExceptionType.NO_DATA,"No Data");
+        if (iplAnalyserMap == null || iplAnalyserMap.size() == 0) {
+            throw new IPLAnalyserException(IPLAnalyserException.ExceptionType.NO_DATA, "No Data");
         }
         Comparator<IPLAnalyserDAO> iplComparator = Comparator.comparing(iplData -> iplData.strikeRate);
         ArrayList iplDTO = IPLUtility.sort(iplComparator, iplAnalyserMap, true);
@@ -63,18 +69,30 @@ public class IPLAnalyser {
         IPLMostRunsCSV[] iplMostFoursCSV = new Gson().fromJson(sortedData, IPLMostRunsCSV[].class);
         return iplMostFoursCSV[0];
     }
+
     public IPLMostRunsCSV getPlayerWithBestStrikeRateWith4sAnd6s(IPLMostRunsCSV maximumFourHitter, IPLMostRunsCSV maximumSixHitter) {
         IPLMostRunsCSV bestPlayer = maximumSixHitter;
-        if(maximumFourHitter.average > maximumSixHitter.average){
+        if (maximumFourHitter.average > maximumSixHitter.average) {
             bestPlayer = maximumFourHitter;
         }
         return bestPlayer;
     }
 
     public IPLMostRunsCSV getPlayerWithGreatAverageAndBestStrikeRate() {
-        return null;
+        Comparator<IPLAnalyserDAO> iplComparator = Comparator.comparing(iplData -> iplData.average);
+        ArrayList iplDTO = IPLUtility.sort(iplComparator, iplAnalyserMap, true);
+        String sortedData = new Gson().toJson(iplDTO);
+        IPLMostRunsCSV[] iplMostRunsCSV = new Gson().fromJson(sortedData, IPLMostRunsCSV[].class);
+        IPLMostRunsCSV bestPlayer = iplMostRunsCSV[0];
+        for (IPLMostRunsCSV mostRunsCSV : iplMostRunsCSV) {
+            if (iplMostRunsCSV[0].strikeRate < mostRunsCSV.strikeRate && iplMostRunsCSV[0].average < mostRunsCSV.average) {
+                bestPlayer = mostRunsCSV;
+                break;
+            }
+        }
+        return bestPlayer;
     }
-
-    public enum PlayerType {BATSMAN, BOWLER}
-
 }
+
+
+
