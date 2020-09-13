@@ -96,4 +96,12 @@ public class IPLAnalyserTest extends TestCase {
         IPLAnalyserDAO[] iplCSV = new Gson().fromJson(player, IPLAnalyserDAO[].class);
         Assert.assertEquals("Krishnappa Gowtham", iplCSV[0].playerName);
     }
+    @Test
+    public void givenIPLMostWicketsCSVFile_ShouldReturnBowlerWhoHas_BestEconomy() throws IPLAnalyserException {
+        IPLAnalyser iplAnalyser = new IPLAnalyser();
+        iplAnalyser.loadIPLData(IPLAnalyser.PlayerType.BOWLER, MOST_WICKETS_CSV_FILE_PATH);
+        String player = iplAnalyser.getSortedData(SortField.ECONOMY);
+        IPLAnalyserDAO[] iplCSV = new Gson().fromJson(player, IPLAnalyserDAO[].class);
+        Assert.assertEquals("Krishnappa Gowtham", iplCSV[0].playerName);
+    }
 }
