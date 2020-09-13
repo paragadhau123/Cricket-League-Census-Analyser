@@ -29,6 +29,7 @@ public class IPLAnalyser {
         this.sortMap.put(SortField.SIXES_AND_FOURS, Comparator.comparing(ipl -> ipl.sixes + ipl.fours));
         this.sortMap.put(SortField.MAXIMUM_RUNS, Comparator.comparing(ipl -> ipl.runs));
         this.sortMap.put(SortField.BEST_BOWLING_AVERAGE, Comparator.comparing(ipl -> ipl.average));
+        this.sortMap.put(SortField.MAXIMUM_WICKETS, Comparator.comparing(ipl -> ipl.wickets));
         Comparator<IPLAnalyserDAO> foursAndSixesComparator = Comparator.comparing(ipl -> ipl.sixes + ipl.fours);
         Comparator<IPLAnalyserDAO> averageComparator = Comparator.comparing(ipl -> ipl.average);
         Comparator<IPLAnalyserDAO> maxRunsComparator = Comparator.comparing(ipl -> ipl.runs);
@@ -37,6 +38,9 @@ public class IPLAnalyser {
         this.sortMap.put(SortField.FOURS_AND_SIXES_WITH_STRIKERATE, foursAndSixesComparator.thenComparing(ipl -> ipl.strikeRate));
         this.sortMap.put(SortField.AVERAGE_WITH_STRIKERATE, averageComparator.thenComparing(ipl -> ipl.strikeRate));
         this.sortMap.put(SortField.STRIKERATE_WITH_4W_AND_5W, fourAndFiveWicketsComparator.thenComparing(ipl -> ipl.strikeRate));
+        this.sortMap.put(SortField.BEST_BOWLING_AVERAGE_WITH_STRIKERATE, averageComparator.thenComparing(ipl -> ipl.strikeRate));
+        //this.sortMap.put(SortField.MAX_WICKETS_WITH_BOWLING_AVERAGE, maxWicketsComparator.thenComparing(ipl -> ipl.average));
+        Comparator<IPLAnalyserDAO> maxWicketsComparator = Comparator.comparing(ipl -> ipl.wickets);
     }
 
     public int loadIPLData(PlayerType playerType, String csvFilePath) throws IPLAnalyserException {
