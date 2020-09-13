@@ -76,4 +76,18 @@ public class IPLAnalyserTest extends TestCase {
             e.printStackTrace();
         }
     }
+    @Test
+    public void givenIPLMostRunsCSVFile_ShouldReturnCricketerWhoHad_BestStrikingRatesWith4sAnd6s() {
+        try {
+            IPLAnalyser iplAnalyser = new IPLAnalyser(IPLAnalyser.PlayerType.BATSMAN);
+            iplAnalyser.loadIPLData(IPLAnalyser.PlayerType.BATSMAN, MOST_RUNS_CSV_FILE_PATH);
+            IPLMostRunsCSV maximumFourHitter = iplAnalyser.getMaximumFourHitter();
+            IPLMostRunsCSV maximumSixHitter = iplAnalyser.getMaximumSixHitter();
+            IPLMostRunsCSV bestPlayerWithStrikeRate = iplAnalyser.getPlayerWithBestStrikeRateWith4sAnd6s(maximumFourHitter,maximumSixHitter);
+            Assert.assertThat(bestPlayerWithStrikeRate.player, CoreMatchers.is("Andre Russell"));
+        } catch (IPLAnalyserException e) {
+            System.out.println("Fail");
+            e.printStackTrace();
+        }
+    }
 }
