@@ -2,7 +2,6 @@ import com.bridgelabz.iplcensusanalyser.exception.IPLAnalyserException;
 import com.bridgelabz.iplcensusanalyser.model.IPLAnalyserDAO;
 import com.bridgelabz.iplcensusanalyser.model.IPLMostRunsCSV;
 import com.bridgelabz.iplcensusanalyser.model.IPLMostWicketsCSV;
-import com.bridgelabz.iplcensusanalyser.service.IPLAnalyser;
 
 import java.io.IOException;
 import java.io.Reader;
@@ -23,14 +22,13 @@ public abstract class IPLAdapter {
         try (Reader reader = Files.newBufferedReader(Paths.get(csvFilePath))) {
             Iterator<E> iplIterator = CSVBuilderFactory.createCSVBuilder().getCSVFileIterator(reader, IPLCSVClass);
             Iterable<E> iplCSV = () -> iplIterator;
-            IPLAnalyser.PlayerType playerType = IPLAnalyser.playerType;
-            switch (playerType) {
-                case BATSMAN:
+            switch (IPLCSVClass.getSimpleName()) {
+                case "IPLMostRunsCSV":
                     StreamSupport.stream(iplCSV.spliterator(), false)
                             .map(IPLMostRunsCSV.class::cast)
                             .forEach(iplCSVObj -> iplMap.put(iplCSVObj.player, new IPLAnalyserDAO(iplCSVObj)));
                     break;
-                case BOWLER:
+                case "IPLMostWicketsCSV":
                     StreamSupport.stream(iplCSV.spliterator(), false)
                             .map(IPLMostWicketsCSV.class::cast)
                             .forEach(iplCSVObj -> iplMap.put(iplCSVObj.player, new IPLAnalyserDAO(iplCSVObj)));
