@@ -39,7 +39,7 @@ public class IPLAnalyser {
         this.sortMap.put(SortField.AVERAGE_WITH_STRIKERATE, averageComparator.thenComparing(ipl -> ipl.strikeRate));
         this.sortMap.put(SortField.STRIKERATE_WITH_4W_AND_5W, fourAndFiveWicketsComparator.thenComparing(ipl -> ipl.strikeRate));
         this.sortMap.put(SortField.BEST_BOWLING_AVERAGE_WITH_STRIKERATE, averageComparator.thenComparing(ipl -> ipl.strikeRate));
-        //this.sortMap.put(SortField.MAX_WICKETS_WITH_BOWLING_AVERAGE, maxWicketsComparator.thenComparing(ipl -> ipl.average));
+        this.sortMap.put(SortField.MAX_WICKETS_WITH_BOWLING_AVERAGE, maxWicketsComparator.thenComparing(ipl -> ipl.average));
         Comparator<IPLAnalyserDAO> maxWicketsComparator = Comparator.comparing(ipl -> ipl.wickets);
     }
 
