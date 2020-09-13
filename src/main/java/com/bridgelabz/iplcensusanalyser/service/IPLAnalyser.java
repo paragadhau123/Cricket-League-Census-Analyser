@@ -71,7 +71,21 @@ public class IPLAnalyser {
 //        CensusUtility.jsonWriter(sortedData, SORTED_US_POPULATION_JSON);
         return iplMostFoursCSV[0];
     }
-
+    public IPLMostRunsCSV getTopStrikeRatePlayer() throws IPLAnalyserException {
+        if (iplAnalyserMap == null || iplAnalyserMap.size() == 0){
+            throw new IPLAnalyserException(IPLAnalyserException.ExceptionType.NO_DATA,"No Data");
+        }
+        Comparator<IPLAnalyserDAO> iplComparator = Comparator.comparing(iplData -> iplData.strikeRate);
+        ArrayList iplDTO = iplAnalyserMap.values()
+                .stream()
+                .sorted(iplComparator.reversed())
+                .map(censusDAO -> censusDAO.getIPLDTO(playerType))
+                .collect(toCollection(ArrayList::new));
+        String sortedData = new Gson().toJson(iplDTO);
+        IPLMostRunsCSV[] iplMostFoursCSV = new Gson().fromJson(sortedData, IPLMostRunsCSV[].class);
+//        CensusUtility.jsonWriter(sortedData, SORTED_US_POPULATION_JSON);
+        return iplMostFoursCSV[0];
+    }
     public enum PlayerType {BATSMAN, BOWLER, ALL_ROUNDER}
 
 }
