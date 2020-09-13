@@ -19,13 +19,13 @@ public class IPLMostRunsCSV {
     public int runs;
 
     @CsvBindByName(column = "HS", required = true)
-    public int highestScore;
+    public String highestScore;
 
     @CsvBindByName(column = "Avg", required = true)
-    public int average;
+    public String average;
 
     @CsvBindByName(column = "SR", required = true)
-    public int strikeRate;
+    public String strikeRate;
 
     @CsvBindByName(column = "100", required = true)
     public int hundreds;

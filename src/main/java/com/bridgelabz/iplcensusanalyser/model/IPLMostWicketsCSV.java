@@ -13,7 +13,7 @@ public class IPLMostWicketsCSV {
     public int innings;
 
     @CsvBindByName(column = "Ov", required = true)
-    public int overs;
+    public String overs;
 
     @CsvBindByName(column = "Runs", required = true)
     public int runs;
@@ -22,13 +22,13 @@ public class IPLMostWicketsCSV {
     public int wickets;
 
     @CsvBindByName(column = "Avg", required = true)
-    public int average;
+    public String average;
 
     @CsvBindByName(column = "Econ", required = true)
-    public int economy;
+    public String economy;
 
     @CsvBindByName(column = "SR", required = true)
-    public int strikeRate;
+    public String strikeRate;
 
     @CsvBindByName(column = "4w", required = true)
     public int fourWickets;
