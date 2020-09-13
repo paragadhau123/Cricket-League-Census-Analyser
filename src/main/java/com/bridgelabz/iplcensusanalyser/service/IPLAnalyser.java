@@ -22,12 +22,16 @@ public class IPLAnalyser {
     public IPLAnalyser(PlayerType playerType) {
         IPLAnalyser.playerType = playerType;
     }
+
     public IPLAnalyser() {
         this.sortMap = new HashMap<>();
         this.sortMap.put(SortField.AVERAGE, Comparator.comparing(ipl -> ipl.average));
         this.sortMap.put(SortField.STRIKE_RATE, Comparator.comparing(ipl -> ipl.strikeRate));
         this.sortMap.put(SortField.SIXES_AND_FOURS, Comparator.comparing(ipl -> ipl.sixes + ipl.fours));
+        Comparator<IPLAnalyserDAO> foursAndSixesComparator = Comparator.comparing(ipl -> ipl.sixes + ipl.fours);
+        this.sortMap.put(SortField.FOURS_AND_SIXES_WITH_STRIKERATE, foursAndSixesComparator.thenComparing(ipl -> ipl.strikeRate));
     }
+
     public int loadIPLData(PlayerType playerType, String csvFilePath) throws IPLAnalyserException {
         iplAnalyserMap = IPLAdapterFactory.getIPLDataObject(playerType, csvFilePath);
         return iplAnalyserMap.size();
@@ -42,6 +46,7 @@ public class IPLAnalyser {
         return new Gson().toJson(iplList);
 
     }
+
     private void sort(List<IPLAnalyserDAO> iplList, Comparator<IPLAnalyserDAO> iplComparator) {
         for (int i = 0; i < iplList.size() - 1; i++) {
             for (int j = 0; j < iplList.size() - i - 1; j++) {
@@ -54,6 +59,7 @@ public class IPLAnalyser {
             }
         }
     }
+
     public IPLMostRunsCSV getMaximumFourHitter() throws IPLAnalyserException {
         if (iplAnalyserMap == null || iplAnalyserMap.size() == 0) {
             throw new IPLAnalyserException(IPLAnalyserException.ExceptionType.NO_DATA, "No Data");
