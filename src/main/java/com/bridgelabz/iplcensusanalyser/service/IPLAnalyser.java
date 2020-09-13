@@ -71,6 +71,10 @@ public class IPLAnalyser {
         return bestPlayer;
     }
 
+    public IPLMostRunsCSV getPlayerWithGreatAverageAndBestStrikeRate() {
+        return null;
+    }
+
     public enum PlayerType {BATSMAN, BOWLER}
 
 }
