@@ -50,4 +50,18 @@ public class IPLAnalyserTest extends TestCase {
             e.printStackTrace();
         }
     }
+    @Test
+    public void givenIPLMostRunsCSVFile_ShouldReturn_PlayersNameWhoHitsMaximum_SixesAndFours() {
+        try {
+            IPLAnalyser iplAnalyser = new IPLAnalyser(IPLAnalyser.PlayerType.BATSMAN);
+            iplAnalyser.loadIPLData(IPLAnalyser.PlayerType.BATSMAN, MOST_RUNS_CSV_FILE_PATH);
+            IPLMostRunsCSV maximumFourHitter = iplAnalyser.getMaximumFourHitter();
+            IPLMostRunsCSV maximumSixHitter = iplAnalyser.getMaximumSixHitter();
+            Assert.assertThat(maximumFourHitter.player, CoreMatchers.is("Shikhar Dhawan"));
+            Assert.assertThat(maximumSixHitter.player, CoreMatchers.is("Andre Russell"));
+        } catch (IPLAnalyserException e) {
+            System.out.println("Fail");
+            e.printStackTrace();
+        }
+    }
 }
