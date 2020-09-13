@@ -2,9 +2,7 @@ package com.bridgelabz.iplcensusanalyser.service;
 
 import com.bridgelabz.iplcensusanalyser.exception.IPLAnalyserException;
 import com.bridgelabz.iplcensusanalyser.model.IPLAnalyserDAO;
-import com.bridgelabz.iplcensusanalyser.model.IPLMostRunsCSV;
 import com.bridgelabz.iplcensusanalyser.utility.IPLAdapterFactory;
-import com.bridgelabz.iplcensusanalyser.utility.IPLUtility;
 import com.bridgelabz.iplcensusanalyser.utility.SortField;
 import com.google.gson.Gson;
 
@@ -34,9 +32,11 @@ public class IPLAnalyser {
         Comparator<IPLAnalyserDAO> foursAndSixesComparator = Comparator.comparing(ipl -> ipl.sixes + ipl.fours);
         Comparator<IPLAnalyserDAO> averageComparator = Comparator.comparing(ipl -> ipl.average);
         Comparator<IPLAnalyserDAO> maxRunsComparator = Comparator.comparing(ipl -> ipl.runs);
+        Comparator<IPLAnalyserDAO> fourAndFiveWicketsComparator = Comparator.comparing(ipl -> ipl.fourWickets + ipl.fiveWickets);
         this.sortMap.put(SortField.MAXIMUM_RUNS_WITH_BEST_AVERAGE, maxRunsComparator.thenComparing(ipl -> ipl.average));
         this.sortMap.put(SortField.FOURS_AND_SIXES_WITH_STRIKERATE, foursAndSixesComparator.thenComparing(ipl -> ipl.strikeRate));
         this.sortMap.put(SortField.AVERAGE_WITH_STRIKERATE, averageComparator.thenComparing(ipl -> ipl.strikeRate));
+        this.sortMap.put(SortField.STRIKERATE_WITH_4W_AND_5W, fourAndFiveWicketsComparator.thenComparing(ipl -> ipl.strikeRate));
     }
 
     public int loadIPLData(PlayerType playerType, String csvFilePath) throws IPLAnalyserException {
@@ -44,7 +44,7 @@ public class IPLAnalyser {
         return iplAnalyserMap.size();
     }
 
-    public String getSortedData(SortField field) throws IPLAnalyserException {
+    public String getSortedData(SortField field, boolean b) throws IPLAnalyserException {
         if (iplList == null || iplList.size() == 0) {
             throw new IPLAnalyserException(IPLAnalyserException.ExceptionType.NO_DATA, "No Data");
         }
