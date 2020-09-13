@@ -2,9 +2,15 @@ package com.bridgelabz.iplcensusanalyser.service;
 
 import com.bridgelabz.iplcensusanalyser.exception.IPLAnalyserException;
 import com.bridgelabz.iplcensusanalyser.model.IPLAnalyserDAO;
+import com.bridgelabz.iplcensusanalyser.model.IPLMostRunsCSV;
 import com.bridgelabz.iplcensusanalyser.utility.IPLAdapterFactory;
+import com.google.gson.Gson;
 
+import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.Map;
+
+import static java.util.stream.Collectors.toCollection;
 
 public class IPLAnalyser {
     private final PlayerType playerType;
@@ -18,7 +24,22 @@ public class IPLAnalyser {
         iplAnalyserMap = IPLAdapterFactory.getIPLDataObject(playerType, csvFilePath);
         return iplAnalyserMap.size();
     }
-
+    public IPLMostRunsCSV getTopBattingAveragePlayer() throws IPLAnalyserException {
+        if (iplAnalyserMap == null || iplAnalyserMap.size() == 0){
+            throw new IPLAnalyserException(IPLAnalyserException.ExceptionType.NO_DATA,"No Data");
+        }
+        Comparator<IPLAnalyserDAO> iplComparator = Comparator.comparing(iplData -> iplData.average);
+        ArrayList iplDTO = iplAnalyserMap.values()
+                .stream()
+//                .filter(iplAnalyserDAO -> iplAnalyserDAO.average != '-')
+                .sorted(iplComparator.reversed())
+                .map(censusDAO -> censusDAO.getIPLDTO(playerType))
+                .collect(toCollection(ArrayList::new));
+        String sortedData = new Gson().toJson(iplDTO);
+        IPLMostRunsCSV[] iplMostRunsCSV = new Gson().fromJson(sortedData, IPLMostRunsCSV[].class);
+//        CensusUtility.jsonWriter(sortedData, SORTED_US_POPULATION_JSON);
+        return iplMostRunsCSV[0];
+    }
     public enum PlayerType {BATSMAN, BOWLER, ALL_ROUNDER}
 
 }
