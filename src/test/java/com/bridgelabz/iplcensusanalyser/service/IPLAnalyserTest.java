@@ -126,5 +126,28 @@ public class IPLAnalyserTest extends TestCase {
         IPLAnalyserDAO[] iplCSV = new Gson().fromJson(player, IPLAnalyserDAO[].class);
         Assert.assertEquals("Imran Tahir", iplCSV[0].playerName);
     }
+    @Test
+    public void givenWrongCSVPathCSVFile_ShouldThrow_Exception() {
+        try {
+            IPLAnalyser iplAnalyser = new IPLAnalyser();
+            int count = iplAnalyser.loadIPLData(IPLAnalyser.PlayerType.BATSMAN, WRONG_FILE_PATH);
+            Assert.assertEquals(99, count);
+        } catch (IPLAnalyserException e) {
+            Assert.assertEquals(e.type, IPLAnalyserException.ExceptionType.IPL_FILE_PROBLEM);
+        }
+    }
+
+    @Test
+    public void givenCSVFileWithNoData_ShouldThrow_Exception() {
+        try {
+            IPLAnalyser iplAnalyser = new IPLAnalyser();
+            iplAnalyser.loadIPLData(IPLAnalyser.PlayerType.BATSMAN, NO_DATA_CSV);
+            String player = iplAnalyser.getSortedData(SortField.AVERAGE, true);
+            IPLAnalyserDAO[] iplCSV = new Gson().fromJson(player, IPLAnalyserDAO[].class);
+            Assert.assertEquals("MS Dhoni", iplCSV[0].playerName);
+        } catch (IPLAnalyserException e) {
+            Assert.assertEquals(e.type, IPLAnalyserException.ExceptionType.NO_DATA);
+        }
+    }
 
 }
