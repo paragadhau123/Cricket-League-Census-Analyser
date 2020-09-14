@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="IPLAnalyserTest" tests="21" skipped="0" failures="0" errors="0" timestamp="2020-09-14T11:57:14" hostname="DESKTOP-E8Q152A" time="2.183">
+  <properties/>
+  <testcase name="givenIPLMostRunsData_IfSortingForMost6sAnd4sAndStrikingRates_ShouldReturnCorrectRecords" classname="IPLAnalyserTest" time="0.358"/>
+  <testcase name="givenIPLMostRunsData_IfCorrectCSVFile_ShouldReturnCorrectRecords" classname="IPLAnalyserTest" time="0.161"/>
+  <testcase name="givenIPLBowlerData_IfSortingForMost4WsAnd5WsWithMostStrikingRate_ShouldReturnCorrectRecords" classname="IPLAnalyserTest" time="0.001"/>
+  <testcase name="givenIPLMostRunsData_IfCorrectCSVButDataNotLoad_ShouldThrowException" classname="IPLAnalyserTest" time="0.0"/>
+  <testcase name="givenIPLBowlerData_IfSortingForMostStrikeRateInBowlingStats_ShouldReturnCorrectRecords" classname="IPLAnalyserTest" time="0.0"/>
+  <testcase name="givenIPLMostRunsData_IfInCorrectCSV_ShouldThrowException" classname="IPLAnalyserTest" time="0.0"/>
+  <testcase name="givenIPLMostRunsData_IfSortedByStrikeRates_ShouldReturnCorrectRecords" classname="IPLAnalyserTest" time="0.184"/>
+  <testcase name="givenIPLBowlerData_IfSortingForGreatAverageRateWithMostStrikingRate_ShouldReturnCorrectRecords" classname="IPLAnalyserTest" time="0.0"/>
+  <testcase name="givenIPLMostRunsData_IfSortingForMostAverageAndStrikingRates_ShouldReturnCorrectRecords" classname="IPLAnalyserTest" time="0.151"/>
+  <testcase name="givenIPLMostRunsData_IfDataNotLoadedForSortingStrikeRates_ShouldThrowException" classname="IPLAnalyserTest" time="0.0"/>
+  <testcase name="givenIPLMostRunsData_IfSortingForMostAverageWithMostRuns_ShouldReturnCorrectRecords" classname="IPLAnalyserTest" time="0.161"/>
+  <testcase name="givenIPLBowlerData_IfSortingForBestBattingAverageAndBestAverageRate_ShouldReturnCorrectRecords" classname="IPLAnalyserTest" time="0.297"/>
+  <testcase name="givenIPLMostRunsData_IfSortingForMost6sAnd4s_ShouldReturnCorrectRecords" classname="IPLAnalyserTest" time="0.283"/>
+  <testcase name="givenIPLBowlerData_IfSortingForEconomyRateInBowlingStats_ShouldReturnCorrectRecords" classname="IPLAnalyserTest" time="0.001"/>
+  <testcase name="givenIPLMostRunsData_IfSortedByAverage_ShouldReturnCorrectRecords" classname="IPLAnalyserTest" time="0.289"/>
+  <testcase name="givenIPLBowlerData_IfSortingForMostBattingRunsAndMostBowlingWickets_ShouldReturnCorrectRecords" classname="IPLAnalyserTest" time="0.288"/>
+  <testcase name="givenIPLBowlerData_IfSortingForMostWicketsTakenGreatAverageRate_ShouldReturnCorrectRecords" classname="IPLAnalyserTest" time="0.0"/>
+  <testcase name="givenIPLMostRunsData_IfSortingForMost6sAnd4sButDataNotLoad_ShouldThrowException" classname="IPLAnalyserTest" time="0.0"/>
+  <testcase name="givenIPLMostRunsData_IfInCorrectCSVFilePath_ShouldThrowException" classname="IPLAnalyserTest" time="0.0"/>
+  <testcase name="givenIPLBowlerData_IfSortingForMostAverageInBowlingStats_ShouldReturnCorrectRecords" classname="IPLAnalyserTest" time="0.001"/>
+  <testcase name="givenIPLMostRunsData_IfCorrectCSVButHasNullValues_ShouldThrowException" classname="IPLAnalyserTest" time="0.001"/>
+  <system-out><![CDATA[100
+]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>

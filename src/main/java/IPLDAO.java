@@ -14,29 +14,24 @@ public class IPLDAO {
     public int bowlersWith5Wickets;
     public int wicketsTaken;
 
-    public IPLDAO(IPLMostRunsCSV next) {
-        playerName = next.playerName;
-        matchPlayed = next.matchPlayed;
-        averageOfBatsmen = next.averageOfBatsmen;
-        runsScored = next.runsScored;
-        strikeRate = next.strikeRate;
-        numberOf4sScored = next.numberOf4sScored;
-        numberOf6sScored = next.numberOf6sScored;
+    public IPLDAO(IPLMostRunsCSV iplMostRunsCSV) {
+        playerName = iplMostRunsCSV.playerName;
+        matchPlayed = iplMostRunsCSV.matchPlayed;
+        averageOfBatsmen = iplMostRunsCSV.averageOfBatsmen;
+        runsScored = iplMostRunsCSV.runsScored;
+        strikeRate = iplMostRunsCSV.strikeRate;
+        numberOf4sScored = iplMostRunsCSV.numberOf4sScored;
+        numberOf6sScored = iplMostRunsCSV.numberOf6sScored;
     }
 
-    public IPLDAO(IPLBowlersCSV next) {
-        playerName = next.playerName;
-        averageOfBowler = next.avgOfBowler;
-        strikeRatesOfBowler = next.strikeRateOfBowler;
-        economyOfBowler = next.economyOfBowler;
-        bowlersWith4Wickets = next.wickets4Taken;
-        bowlersWith5Wickets = next.wickets5Taken;
-        wicketsTaken = next.wicketsTaken;
+    public IPLDAO(IPLBowlersCSV iplBowlersCSV) {
+        playerName = iplBowlersCSV.playerName;
+        averageOfBowler = iplBowlersCSV.avgOfBowler;
+        strikeRatesOfBowler = iplBowlersCSV.strikeRateOfBowler;
+        economyOfBowler = iplBowlersCSV.economyOfBowler;
+        bowlersWith4Wickets = iplBowlersCSV.wickets4Taken;
+        bowlersWith5Wickets = iplBowlersCSV.wickets5Taken;
+        wicketsTaken = iplBowlersCSV.wicketsTaken;
     }
 
-    public IPLDAO(String playerName, int matchPlayed, double averageOfBatsmen) {
-        this.playerName = playerName;
-        this.matchPlayed = matchPlayed;
-        this.averageOfBatsmen = averageOfBatsmen;
-    }
 }

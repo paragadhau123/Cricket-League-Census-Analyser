@@ -41,6 +41,4 @@ public class IPLBowlersCSV {
     @CsvBindByName(column = "5w")
     public int wickets5Taken;
 
-    public IPLBowlersCSV() {
-    }
 }

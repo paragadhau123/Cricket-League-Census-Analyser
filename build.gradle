@@ -12,3 +12,12 @@ repositories {
 dependencies {
     testCompile group: 'junit', name: 'junit', version: '4.12'
 }
+dependencies {
+    compile "com.opencsv:opencsv:4.0"
+}
+dependencies {
+    compile(files("D:\\parag\\Fellowship\\Cricket-League-Census-Analyser\\gradle\\lib\\CSVBuilder.jar."))
+}
+dependencies {
+    compile 'com.google.code.gson:gson:2.2.+'
+}

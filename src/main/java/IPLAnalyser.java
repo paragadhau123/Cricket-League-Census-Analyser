@@ -6,23 +6,18 @@ import java.util.Map;
 import java.util.stream.Collectors;
 
 public class IPLAnalyser {
-
     Map<String, IPLDAO> iplHashMap;
     private PlayerStats statistics;
     SortingContainer container;
-    private IPLAdapter adapter;
+    public IPLAdapter adapter;
 
     public IPLAnalyser(PlayerStats statistics) {
         container = new SortingContainer();
         this.statistics = statistics;
     }
 
-    public void setAdapter(IPLAdapter adapter) {
+    public void setAdapter(IPLAdapter adapter ) {
         this.adapter = adapter;
-    }
-
-    public IPLAnalyser() {
-
     }
 
     public Map<String, IPLDAO> loadIPLData(String... csvFilePath) throws AnalyserException {

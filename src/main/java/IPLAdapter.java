@@ -33,7 +33,7 @@ public abstract class IPLAdapter {
         } catch (CSVBuilderException | IOException e) {
             throw new AnalyserException(e.getMessage(), AnalyserException.ExceptionType.CENSUS_FILE_PROBLEM);
         } catch (RuntimeException e) {
-            throw new AnalyserException(e.getMessage(), AnalyserException.ExceptionType.CENSUS_FILE_PROBLEM);
+            throw  new AnalyserException(e.getMessage(),AnalyserException.ExceptionType.CENSUS_FILE_PROBLEM);
         }
     }
 }

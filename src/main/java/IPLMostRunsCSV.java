@@ -44,6 +44,4 @@ public class IPLMostRunsCSV {
     @CsvBindByName(column = "6s")
     public int numberOf6sScored;
 
-    public IPLMostRunsCSV() {
-    }
 }
