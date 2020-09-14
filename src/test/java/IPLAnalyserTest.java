@@ -36,6 +36,7 @@ public class IPLAnalyserTest {
             Assert.assertEquals(AnalyserException.ExceptionType.CENSUS_FILE_PROBLEM, e.type);
         }
     }
+
     @Test
     public void givenIPLMostRunsData_IfInCorrectCSVFilePath_ShouldThrowException() {
         IPLAnalyser iplAnalyser = new IPLAnalyser(PlayerStats.BATTING_STATS);
@@ -46,6 +47,7 @@ public class IPLAnalyserTest {
             Assert.assertEquals(AnalyserException.ExceptionType.CENSUS_FILE_PROBLEM, e.type);
         }
     }
+
     @Test
     public void givenIPLMostRunsData_IfCorrectCSVButHasNullValues_ShouldThrowException() {
         IPLAnalyser iplAnalyser = new IPLAnalyser(PlayerStats.BATTING_STATS);
@@ -56,6 +58,7 @@ public class IPLAnalyserTest {
             Assert.assertEquals(AnalyserException.ExceptionType.CENSUS_FILE_PROBLEM, e.type);
         }
     }
+
     @Test
     public void givenIPLMostRunsData_IfCorrectCSVButDataNotLoad_ShouldThrowException() {
         IPLAnalyser iplAnalyser = new IPLAnalyser(PlayerStats.BATTING_STATS);
@@ -280,7 +283,7 @@ public class IPLAnalyserTest {
     public void givenIPLBowlerData_IfSortingForBestBattingAverageAndBestAverageRate_ShouldReturnCorrectRecords() {
         try {
             IPLAnalyser iplAnalyser = new IPLAnalyser(PlayerStats.BATTING_STATS);
-           // iplAnalyser.setAdapter(new BatsmanAdapter());
+            // iplAnalyser.setAdapter(new BatsmanAdapter());
             BatsmanAdapter batsmanAdapter = new BatsmanAdapter();
             map = batsmanAdapter.loadIPLData(IPL_2019_FACTSHEET_MOST_RUNS_CSV_FILE_PATH, IPL_2019_FACTSHEET_BOWLING_STATS);
             String sortedResult = iplAnalyser.getFieldWiseSortedIPLData
@@ -296,13 +299,13 @@ public class IPLAnalyserTest {
     public void givenIPLBowlerData_IfSortingForMostBattingRunsAndMostBowlingWickets_ShouldReturnCorrectRecords() {
         try {
             IPLAnalyser iplAnalyser = new IPLAnalyser(PlayerStats.BATTING_STATS);
-            BatsmanAdapter batsmanAdapter = new BatsmanAdapter();
             iplAnalyser.setAdapter(new BatsmanAdapter());
-            map = batsmanAdapter.loadIPLData(IPL_2019_FACTSHEET_MOST_RUNS_CSV_FILE_PATH,IPL_2019_FACTSHEET_BOWLING_STATS);
+            BatsmanAdapter batsmanAdapter = new BatsmanAdapter();
+            map = batsmanAdapter.loadIPLData(IPL_2019_FACTSHEET_MOST_RUNS_CSV_FILE_PATH, IPL_2019_FACTSHEET_BOWLING_STATS);
             String sortedResult = iplAnalyser.getFieldWiseSortedIPLData
                     (FieldsToSort.BY_MOST_BATTING_RUNS_WITH_MOST_BOWLING_WICKETS, map);
             IPLDAO[] csvs = new Gson().fromJson(sortedResult, IPLDAO[].class);
-            Assert.assertEquals("Hardik Pandya ", csvs[99].playerName);
+            Assert.assertEquals("Hardik Pandya", csvs[99].playerName);
         } catch (AnalyserException e) {
 
         }

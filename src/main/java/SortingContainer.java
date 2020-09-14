@@ -23,7 +23,7 @@ public class SortingContainer {
         Comparator<IPLDAO> bowlingEconomyRateComparator = Comparator.comparing(compare -> compare.economyOfBowler);
 
         Comparator<IPLDAO> mostRunsAndMostWicketsComparator = Comparator.comparing(compare ->
-                (compare.runsScored )+ (compare.wicketsTaken));
+                (compare.runsScored ) + (compare.wicketsTaken));
 
         Comparator<IPLDAO> most4WsAnd5WsComparator = Comparator.comparing(compare -> (compare.
                 bowlersWith4Wickets) + (compare.bowlersWith5Wickets));
